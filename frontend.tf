@@ -21,6 +21,6 @@ resource "aws_route53_record" "frontend" {
  records = [aws_instance.frontend.private_ip]
 type = "A"
 ttl = 0
-name = "frontend-dev"
+name = "frontend-devv"
 }
 
