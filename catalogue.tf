@@ -5,6 +5,18 @@ resource "aws_instance" "catalogue" {
   tags = {
     Name= "Catalogue"
   }
+  provisioner "remote-exec" {
+    connection {
+      type = "ssh"
+      user = "ec2-user"
+      password = "DevOps321"
+      host = self.private_ip
+    }
+    inline = [ 
+      "pip3.11 install ansible"
+      "ansible-pull -i localhost, -U https://github.com/Thippareddykishor/roboshop-ansible.git roboshop.yml -e user=ec2-user -e password=DevOps321 -e env=dev"     
+     ]
+  }
 }
 
 resource "aws_route53_record" "catalogue" {
