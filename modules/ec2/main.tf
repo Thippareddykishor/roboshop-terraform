@@ -20,10 +20,10 @@ resource "aws_instance" "instance" {
   # }
 }
 
-data "aws_route53_zone" "selected" {
-  name = "kommanuthala.store"
-  private_zone = false
-}
+# data "aws_route53_zone" "selected" {
+#   name = "kommanuthala.store"
+#   private_zone = false
+# }
 
 resource "aws_route53_record" "catalogue" {
   for_each = var.instances
@@ -31,7 +31,7 @@ resource "aws_route53_record" "catalogue" {
   type = "A"
   records = [aws_instance.instance.private_ip]
   ttl = 10
-  zone_id = data.aws_route53_zone.selected.id
+  zone_id = var.zone_id
 }
 
 # resource "null_resource" "name" {
