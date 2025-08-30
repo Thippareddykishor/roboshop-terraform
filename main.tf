@@ -1,9 +1,10 @@
 module "ec2" {
+  for_each = var.instances
   source                  = "./modules/ec2"
-  instance_type           = "t2.micro"
-  name                    = "example-ec2"
-  ami_id                  = "ami-12345678"
-  vpc_security_group_ids  = ["sg-12345678"]
-  zone_id                 = "Z1234567890"
+  instance_type           = each.value["instance_type"]
+  name                    = each.value["name"]
+  ami_id                  = each.value["ami_id"]
+  vpc_security_group_ids  = var.vpc_security_group_ids
+  zone_id                 = ""
   env                     = "dev"
 }
