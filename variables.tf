@@ -17,3 +17,7 @@ variable "instances" {
     "mongodb"
   ]
 }
+
+variable "env" {
+  default = "dev"
+}
