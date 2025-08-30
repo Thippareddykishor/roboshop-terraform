@@ -5,18 +5,18 @@ resource "aws_instance" "catalogue" {
   tags = {
     Name= "Catalogue"
   }
-  provisioner "remote-exec" {
-    connection {
-      type = "ssh"
-      user = "ec2-user"
-      password = "DevOps321"
-      host = self.private_ip
-    }
-    inline = [ 
-      "sudo pip3.11 install ansible",
-      "ansible-pull -i localhost, -U https://github.com/Thippareddykishor/roboshop-ansible.git roboshop.yml -e user=ec2-user -e password=DevOps321 -e component_name=frontend -e env=dev"     
-     ]
-  }
+  # provisioner "remote-exec" {
+  #   connection {
+  #     type = "ssh"
+  #     user = "ec2-user"
+  #     password = "DevOps321"
+  #     host = self.private_ip
+  #   }
+  #   inline = [ 
+  #     "sudo pip3.11 install ansible",
+  #     "ansible-pull -i localhost, -U https://github.com/Thippareddykishor/roboshop-ansible.git roboshop.yml -e user=ec2-user -e password=DevOps321 -e component_name=frontend -e env=dev"     
+  #    ]
+  # }
 }
 
 data "aws_route53_zone" "selected" {
@@ -33,5 +33,17 @@ resource "aws_route53_record" "catalogue" {
 }
 
 resource "null_resource" "name" {
-  
+  provisioner "remote-exec" {
+    connection {
+      type = "ssh"
+      user = "ec2-user"
+      password = "DevOps321"
+      host = aws_instance.catalogue.public_ip
+    }
+
+    inline = [ 
+      "sudo pip3.11 install ansible",
+      "ansible-pull -i localhost, -U https://github.com/Thippareddykishor/roboshop-ansible.git roboshop.yml -e user=ec2-user -e password=DevOps321 -e env=dev"
+     ]
+  }
 }
