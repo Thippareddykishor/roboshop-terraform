@@ -1,13 +1,14 @@
 resource "aws_instance" "catalogue" {
-  instance_type = "t3.micro"
-  vpc_security_group_ids = ["sg-0a1b50421de0cb519"]
+    ami = var.ami_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = var.vpc_security_group_ids
   tags = {
     Name= "Catalogue"
   }
 }
 
 resource "aws_route53_record" "catalogue" {
-  name = "catalogue-devv"
+  name = "catalogue-dev"
   type = "A"
   records = [aws_instance.catalogue.private_ip]
   ttl = 10

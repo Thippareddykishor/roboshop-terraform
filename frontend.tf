@@ -1,11 +1,11 @@
 provider aws {
-
+region = "us-east-1"
 }
 
 resource "aws_instance" "frontend" {
-  ami="ami-09c813fb71547fc4f"
-  instance_type = "t3.micro"
-  vpc_security_group_ids = ["sg-0a1b50421de0cb519"]
+  ami=var.ami_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = var.vpc_security_group_ids
   tags = {
     Name ="frontend"
   }
@@ -21,6 +21,6 @@ resource "aws_route53_record" "frontend" {
  records = [aws_instance.frontend.private_ip]
 type = "A"
 ttl = 0
-name = "frontend-devv"
+name = "frontend-dev"
 }
 
