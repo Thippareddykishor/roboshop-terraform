@@ -4,7 +4,7 @@ resource "aws_instance" "instance" {
   instance_type = var.instance_type
   vpc_security_group_ids = var.vpc_security_group_ids
   tags = {
-    Name= "Catalogue"
+    Name= var.instances[count.index]
   }
   # provisioner "remote-exec" {
   #   connection {
