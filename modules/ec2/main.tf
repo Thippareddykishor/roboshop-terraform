@@ -24,14 +24,14 @@ resource "aws_instance" "instance" {
 #   private_zone = false
 # }
 
-resource "aws_route53_record" "catalogue" {
-  for_each = var.instances
-  name = "${var.name}-${var.env}"
-  type = "A"
-  records = [aws_instance.instance.private_ip]
-  ttl = 10
-  zone_id = var.zone_id
-}
+# resource "aws_route53_record" "catalogue" {
+#   for_each = var.instances
+#   name = "${var.name}-${var.env}"
+#   type = "A"
+#   records = [aws_instance.instance.private_ip]
+#   ttl = 10
+#   zone_id = var.zone_id
+# }
 
 # resource "null_resource" "name" {
 #   provisioner "remote-exec" {
