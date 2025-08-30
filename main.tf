@@ -4,7 +4,7 @@ resource "aws_instance" "instance" {
   instance_type = var.instance_type
   vpc_security_group_ids = var.vpc_security_group_ids
   tags = {
-    Name= each.key
+    Name= var.name
   }
   # provisioner "remote-exec" {
   #   connection {
@@ -27,9 +27,9 @@ data "aws_route53_zone" "selected" {
 
 resource "aws_route53_record" "catalogue" {
   for_each = var.instances
-  name = "${each.key}-${var.env}"
+  name = "${var.name}-${var.env}"
   type = "A"
-  records = [aws_instance.instance[each.key].private_ip]
+  records = [aws_instance.instance.private_ip]
   ttl = 10
   zone_id = data.aws_route53_zone.selected.id
 }
