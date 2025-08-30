@@ -6,5 +6,5 @@ module "ec2" {
   ami_id                  = each.value["ami_id"]
   vpc_security_group_ids  = var.vpc_security_group_ids
   zone_id                 = var.zone_id
-  env                     = "dev"
+  env                     = var.env
 }
