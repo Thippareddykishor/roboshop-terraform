@@ -13,10 +13,15 @@ resource "aws_instance" "catalogue" {
       host = self.private_ip
     }
     inline = [ 
-      "pip3.11 install ansible",
+      "sudo pip3.11 install ansible",
       "ansible-pull -i localhost, -U https://github.com/Thippareddykishor/roboshop-ansible.git roboshop.yml -e user=ec2-user -e password=DevOps321 -e env=dev"     
      ]
   }
+}
+
+data "aws_route53_zone" "selected" {
+  name = "kommanuthala.store"
+  private_zone = false
 }
 
 resource "aws_route53_record" "catalogue" {
@@ -24,5 +29,5 @@ resource "aws_route53_record" "catalogue" {
   type = "A"
   records = [aws_instance.catalogue.private_ip]
   ttl = 10
-  zone_id = data.aws_route53_zone.selected
+  zone_id = data.aws_route53_zone.selected.id
 }
