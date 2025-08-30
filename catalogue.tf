@@ -1,4 +1,5 @@
-resource "aws_instance" "catalogue" {
+resource "aws_instance" "instance" {
+  count = length(var.instances)
   ami = var.ami_id
   instance_type = var.instance_type
   vpc_security_group_ids = var.vpc_security_group_ids
