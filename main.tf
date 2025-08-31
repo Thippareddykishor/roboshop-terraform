@@ -7,4 +7,5 @@ module "ec2" {
   vpc_security_group_ids  = var.vpc_security_group_ids
   zone_id                 = var.zone_id
   env                     = var.env
+  vault_token             = var.vault_token
 }
