@@ -36,10 +36,10 @@ instances = {
     #   ami_id= "ami-09c813fb71547fc4f"
     #   instance_type="t3.micro"
     # }
-    payment= {
-      ami_id= "ami-09c813fb71547fc4f"
-      instance_type="t3.micro"
-    }
+    # payment= {
+    #   ami_id= "ami-09c813fb71547fc4f"
+    #   instance_type="t3.micro"
+    # }
   }
 
   zone_id = "Z10310253KPZLFJOC7YEK"
