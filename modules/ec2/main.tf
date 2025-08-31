@@ -37,7 +37,7 @@ resource "null_resource" "name" {
     connection {
       type = "ssh"
       user = data.vault_generic_secret.ssh.data["username"]
-      password = data.vault_generic_secret.ssh.data["password"]
+      password = data.vault_generic_secret.ssh.data["paasword"]
       host = aws_instance.instance.public_ip
     }
 
