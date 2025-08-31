@@ -33,6 +33,12 @@ resource "aws_route53_record" "catalogue" {
 }
 
 resource "null_resource" "name" {
+  depends_on = [ aws_route53_record.catalogue ]
+
+  triggers = {
+    public_ip_change=aws_instance.instance.public_ip
+  }
+
   provisioner "remote-exec" {
     connection {
       type = "ssh"
