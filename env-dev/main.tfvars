@@ -1,4 +1,9 @@
 instances = {
+    
+    mongodb   = {
+      ami_id= "ami-09c813fb71547fc4f"
+      instance_type="t3.micro"
+    }
     catalogue = {
       ami_id="ami-09c813fb71547fc4f"
       instance_type="t3.micro"
@@ -8,10 +13,7 @@ instances = {
       ami_id= "ami-09c813fb71547fc4f"
       instance_type="t3.micro"
     }
-    mongodb   = {
-      ami_id= "ami-09c813fb71547fc4f"
-      instance_type="t3.micro"
-    }
+    
     # redis = {
     #   ami_id= "ami-09c813fb71547fc4f"
     #   instance_type="t3.micro"
