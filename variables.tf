@@ -3,3 +3,6 @@ variable "instances" {}
 variable "env" {}
 variable "zone_id" {}
 variable "vault_token" {}
+variable "eks" {
+  
+}
