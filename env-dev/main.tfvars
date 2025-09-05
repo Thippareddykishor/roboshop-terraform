@@ -52,7 +52,7 @@ instances = {
 
   eks ={
     main ={
-    subnets=["subnet-00d643a230b615c78","subnet-07f698b9bb982a341"]
+    subnets=["subnet-04a0fd20c44b90c2f","subnet-07f698b9bb982a341"]
     eks_version=1.32
     }
   }
