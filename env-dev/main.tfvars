@@ -54,5 +54,12 @@ instances = {
     main ={
     subnets=["subnet-04a0fd20c44b90c2f","subnet-07f698b9bb982a341"]
     eks_version=1.32
+    node_groups= {
+      main = {
+        min_nodes = 1
+        max_nodes =2
+        instance_types =["t3.medium","t3.medium"]
+      }
+    }
     }
   }
