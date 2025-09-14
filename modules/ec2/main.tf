@@ -39,17 +39,17 @@ resource "null_resource" "name" {
     public_ip_change=aws_instance.instance.public_ip
   }
 
-  # provisioner "remote-exec" {
-  #   connection {
-  #     type = "ssh"
-  #     user = data.vault_generic_secret.ssh.data["username"]
-  #     password = data.vault_generic_secret.ssh.data["paasword"]
-  #     host = aws_instance.instance.public_ip
-  #   }
+  provisioner "remote-exec" {
+    connection {
+      type = "ssh"
+      user = data.vault_generic_secret.ssh.data["username"]
+      password = data.vault_generic_secret.ssh.data["paasword"]
+      host = aws_instance.instance.public_ip
+    }
 
-  #   inline = [ 
-  #     "sudo pip3.11 install ansible hvac"
-  #     #  "ansible-pull -i localhost, -U https://github.com/Thippareddykishor/roboshop-ansible.git roboshop.yml -e user=ec2-user -e password=DevOps321 -e env=${var.env} -e component_name=${var.name} -e vault_token=${var.vault_token}"
-  #    ]
-  # }
+    inline = [ 
+      "sudo pip3.11 install ansible hvac",
+       "ansible-pull -i localhost, -U https://github.com/Thippareddykishor/roboshop-ansible.git roboshop.yml -e user=ec2-user -e password=DevOps321 -e env=${var.env} -e component_name=${var.name} -e vault_token=${var.vault_token}"
+     ]
+  }
 }
