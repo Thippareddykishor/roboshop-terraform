@@ -9,14 +9,14 @@ jobs:
       - name: Terraform init
         run:  |    
           terrafrom init -backend-config=env-dev/state.tfvars
-  Terraform-plan:
-    runs-on: self-hosted
-    steps:
-      - name: checkout repo
-        uses: actions/checkout@v4
-      - name: Terraform plan
-        run: |
-          terraform plan -var-file=env-dev/main.tfvars
+#   Terraform-plan:
+#     runs-on: self-hosted
+#     steps:
+#       - name: checkout repo
+#         uses: actions/checkout@v4
+#       - name: Terraform plan
+#         run: |
+#           terraform plan -var-file=env-dev/main.tfvars
   Terraform-apply:
     runs-on: self-hosted
     steps:
