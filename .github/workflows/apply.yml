@@ -2,7 +2,7 @@ name: Terraform apply
 on: [workflow_dispatch]
 jobs:
   Terraform-init:
-    runs-on: self-hosted
+    runs-on: [self-hosted]
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
