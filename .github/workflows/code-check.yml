@@ -1,0 +1,9 @@
+name: Terraform
+on: push
+jobs:
+    code-cheks:
+        runs-on: ubuntu-latest
+        steps:
+          - name: check out repo code
+            uses: actions/checkout@v4
+    
