@@ -32,6 +32,7 @@ jobs:
           vault_token: ${{ secrets.vault_token }}
 
   Helm-install-application: 
+    needs: Terraform-apply
     runs-on: self-hosted
     steps:
       - name: checkout repo
