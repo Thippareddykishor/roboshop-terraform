@@ -43,4 +43,5 @@ jobs:
       - name: terraform apply
         run:  |
           cd helm
+          aws eks update-kubeconfig  --name dev
           make dev
