@@ -30,3 +30,25 @@ resource "aws_eks_node_group" "main" {
     min_size = each.value["min_nodes"]
   }
 }
+
+
+
+resource "aws_eks_access_entry" "main" {
+  for_each = var.access
+  cluster_name = aws_eks_cluster.main
+  principal_arn = each.value["role"]
+  kubernetes_groups = each.value["kubernetes_groups"]
+  type = "STANDARD"
+}
+
+resource "aws_eks_access_policy_association" "main" {
+  for_each = var.access
+  cluster_name = aws_eks_cluster.main
+  policy_arn    = each.value["policy_arn"]
+  principal_arn = each.value["role"]
+
+  access_scope {
+    type = each.value["access_scope_type"]
+    namespaces = each.value["access_scope_namespaces"]
+  }
+}
