@@ -1,4 +1,3 @@
-variable "addons"{}
 
 resource "aws_eks_addon" "addons" {
   for_each = var.addons
