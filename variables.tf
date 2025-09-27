@@ -5,3 +5,4 @@ variable "zone_id" {}
 variable "vault_token" {}
 variable "eks" {}
 variable "db_instances" {}
+variable "access" {}
