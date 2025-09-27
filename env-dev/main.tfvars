@@ -66,7 +66,7 @@ db_instances = {
 
 
   access = {
-    workstation={
+    workstation= {
       role="arn:aws:iam::740279881161:role/workstation"
       kubernets_groups=[]
       policy_arn="arn:aws:eks::aws:cluster-access-policy/AmazonEKSAdminPolicy"
@@ -74,3 +74,5 @@ db_instances = {
       access_scope_namespaces=[]
     }
   }
+
+  
