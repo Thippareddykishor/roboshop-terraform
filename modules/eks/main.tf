@@ -43,7 +43,7 @@ resource "aws_eks_access_entry" "main" {
 
 resource "aws_eks_access_policy_association" "main" {
   for_each = var.access
-  cluster_name = aws_eks_cluster.main
+  cluster_name = aws_eks_cluster.main.name
   policy_arn    = each.value["policy_arn"]
   principal_arn = each.value["role"]
 
