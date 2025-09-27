@@ -1,4 +1,4 @@
-name: Terraform
+name: Terraform checkout
 on: workflow_dispatch
 jobs:
     code-cheks:
