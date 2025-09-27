@@ -62,10 +62,7 @@ db_instances = {
       }
     }
     }
-  }
-
-
-  access = {
+    access = {
     workstation= {
       role="arn:aws:iam::740279881161:role/workstation"
       kubernets_groups=[]
@@ -78,3 +75,7 @@ db_instances = {
   addons ={
     metric_server = {}
   }
+  }
+
+
+  
