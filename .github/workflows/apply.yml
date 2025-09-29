@@ -42,10 +42,11 @@ jobs:
           # path: helm
       - name: terraform apply
         run:  |
+          git log --format ="%H" -n 1
           # cd helm
           # aws eks update-kubeconfig  --name dev
           # make dev
-          gh workflow ls
-          gh workflow run ci-main.yml
+          # gh workflow ls
+          # gh workflow run ci-main.yml
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
