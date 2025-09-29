@@ -10,29 +10,29 @@ jobs:
   #       run:  |    
   #         terraform init -reconfigure -backend-config=env-dev/state.tfvars
   #         # terraform init -backend-config=env-dev/state.tfvars
-  Terraform-plan:
-    runs-on: self-hosted
-    steps:
-      - name: checkout repo
-        uses: actions/checkout@v4
-      - name: Terraform plan
-        run: |
-          terraform plan -var-file=env-dev/main.tfvars 2>&1 | tail -n6 | head -n1 >$GITHUB_STEP_SUMMARY
-  Terraform-apply:
-    runs-on: self-hosted
-    steps:
-      - name: checkout repo
-        uses: actions/checkout@v4
-      - name:   Terraform apply
-        run: |
+  # Terraform-plan:
+  #   runs-on: self-hosted
+  #   steps:
+  #     - name: checkout repo
+  #       uses: actions/checkout@v4
+  #     - name: Terraform plan
+  #       run: |
+  #         terraform plan -var-file=env-dev/main.tfvars 2>&1 | tail -n6 | head -n1 >$GITHUB_STEP_SUMMARY
+  # Terraform-apply:
+  #   runs-on: self-hosted
+  #   steps:
+  #     - name: checkout repo
+  #       uses: actions/checkout@v4
+  #     - name:   Terraform apply
+  #       run: |
         
-          terraform init -backend-config=env-dev/state.tfvars
-          terraform apply -var-file=env-dev/main.tfvars -var vault_token=${vault_token} -auto-approve
-        env:
-          vault_token: ${{ secrets.vault_token }}
+  #         terraform init -backend-config=env-dev/state.tfvars
+  #         terraform apply -var-file=env-dev/main.tfvars -var vault_token=${vault_token} -auto-approve
+  #       env:
+  #         vault_token: ${{ secrets.vault_token }}
 
   Helm-install-application: 
-    needs: Terraform-apply
+    # needs: Terraform-apply
     runs-on: self-hosted
     steps:
       - name: checkout repo
