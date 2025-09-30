@@ -15,9 +15,19 @@ provider "vault" {
 #   }
 # }
 
-provider "kubernetes" {
-  config_path = "~/.kube/config"
+# provider "kubernetes" {
+#   config_path = "~/.kube/config"
+# }
+
+terraform {
+  required_providers {
+    helm = {
+      source  = "hashicorp/helm"
+      version = ">= 2.4.1" # or latest
+    }
+  }
 }
+
 
 provider "helm" {
   kubernetes {
