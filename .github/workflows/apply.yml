@@ -26,7 +26,7 @@ jobs:
       - name:   Terraform apply
         run: |
         
-          terraform init -backend-config=env-dev/state.tfvars
+          terraform init -upgrade -backend-config=env-dev/state.tfvars
           terraform apply -var-file=env-dev/main.tfvars -var vault_token=${vault_token} -auto-approve
         env:
           vault_token: ${{ secrets.vault_token }}
