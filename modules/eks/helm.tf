@@ -36,3 +36,10 @@ resource "null_resource" "argocd" {
     EOF
   }
 }
+
+resource "helm_release" "ingress" {
+  depends_on  = [ null_resource.kubeconfig ]
+  name        = "ingress-nginx"
+  repository  = "https://kubernets.github.io/ingress-nginx"
+  chart       = "ingress-nginx"
+}
