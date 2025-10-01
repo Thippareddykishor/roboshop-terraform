@@ -31,6 +31,134 @@ jobs:
         env:
           vault_token: ${{ secrets.vault_token }}
 
+  Deploy-cart:
+    runs-on: self-hosted
+    needs: Terraform-apply
+    steps:
+      - name:  checkout repo 
+        uses:  actions/checkout@v4
+        with:
+          repository: Thippareddykishor/roboshop-cart
+          path: app
+      - name:  checkout repo
+        uses: actions/checkout@v4
+        with:
+          repository: Thippareddykishor/roboshop-helm
+          path: helm
+      - name: install Helm
+        run: |
+          cd app
+          GID=$(git log --format ="%H" -n 1)
+          cd ../helm
+          bash argocd.sh cart dev $GID
+  
+  Deploy-Catalogue:
+    needs: Terraform-apply
+    runs-on: self-hosted
+    steps:
+      - name: checkout repo code
+        uses: actions/checkout@v4
+        with:
+          repository:  Thippareddykishor/roboshop-catalogue
+          path: app
+      - name: check out repo
+        uses: actions/checkout@v4
+        with: 
+          repository: Thippareddykishor/roboshop-helm
+          path: helm
+      - name: helm install
+        run: |
+          cd app
+          GID=$(git log --format ="%H" -n 1)
+          cd ../helm
+          bash argocd sh catalogue dev $GID
+  
+  Deploy-User:
+    needs: Terraform-apply
+    runs-on: self-hosted
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+        with:
+          repository: Thippareddykishor/roboshop-user
+          path: app
+      - name: checkout code
+        uses: actions/checkout@v4
+        with:
+          repository:  Thippareddykishor/roboshop-helm
+          path: helm
+      - name: install helm
+        run: |
+            cd app
+            GID=$(git log --format ="%H" -n 1)
+            cd ../helm
+            bash argocd.sh user dev $GID
+  
+  Deploy-Shipping:
+    needs: Terraform-apply
+    runs-on: self-hosted
+    steps:
+      - name: checkout repo code
+        uses: actions/checkout@v4
+        with:
+          repository: Thippareddykishor/roboshop-payment
+          path: app
+      - name: checkout repo code
+        uses: actions/checkout@v4
+        with:
+          repository: Thippareddykishor/roboshop-helm
+          path: helm
+      - name: helm install
+        run: |
+          cd app 
+          GID=$(git log --format ="%H" -n 1)
+          cd ../helm
+          bash argocd shipping dev $GID
+
+  
+  Deploy-Payment:
+    needs: Terraform-apply
+    runs-on: self-hosted
+    steps:
+      - name: checkout repo code
+        uses: actions/checkout@v4
+        with:
+          repository: Thippareddykishor/roboshop-payment
+          path: app
+      - name: checkout code
+        uses: actions/checkout@v4
+        with:
+          repository: Thippareddykishor/roboshop-helm
+          path: helm
+      - name: helm install
+        run: |
+          cd app
+          GID=$(git log --format ="%H" -n 1)
+          cd ../helm
+          bash argocd.sh payment dev $GID
+
+  Deploy-Frontend:
+    needs: Terraform-apply
+    runs-on: self-hosted
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+        with:
+          repository: Thippareddykishor/roboshop-frontend
+          path: app
+      - name: checkout repo
+        uses: actions/checkout@v4
+        with:
+          repository: Thippareddykishor/roboshop-helm
+          path: helm
+      - name: install helm
+        run: |
+          cd app
+          GID=$(git log --format ="%H" -n 1)
+          cd ../helm
+          bash argocd frontend dev $GID
+
+
   # Helm-install-application: 
   #   # needs: Terraform-apply
   #   runs-on: ubuntu-latest
