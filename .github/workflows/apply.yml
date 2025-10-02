@@ -101,7 +101,7 @@ jobs:
       - name: checkout repo code
         uses: actions/checkout@v4
         with:
-          repository: Thippareddykishor/roboshop-payment
+          repository: Thippareddykishor/roboshop-shipping
           path: app
       - name: checkout repo code
         uses: actions/checkout@v4
