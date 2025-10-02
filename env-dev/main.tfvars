@@ -44,7 +44,7 @@ db_instances = {
     # }
   }
 
-  zone_id = "Z098768411FUL8QFJIGI"
+  zone_id = "Z05764853PUNNX41R0FK9"
 
   vpc_security_group_ids = ["sg-0fd21419ad7cf8b21"]
 
