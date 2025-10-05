@@ -44,5 +44,6 @@ resource "helm_release" "ingress" {
   chart       = "ingress-nginx"
 
   values = [
-    file("$(path.module)/helm-config/ingress.yml")]
+    file("${path.module}/helm-config/ingress.yml")
+    ]
 }
