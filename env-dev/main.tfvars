@@ -52,7 +52,7 @@ db_instances = {
 
   eks ={
     main ={
-    subnets=["subnet-0823463ee51c6c3fd","subnet-0431403cdd3cc4218"]
+    subnets=["subnet-024bf5b7145f95d4b","subnet-0feec5c2a125d6b2e"]
     eks_version=1.32
     node_groups= {
       main = {
