@@ -76,7 +76,8 @@ resource "helm_release" "argocd" {
     value = "argocd-${var.env}.kommanuthala.store"
   }
   values = [
-    file("${path.module/helm-config/argocd.yml}")
+    file("${path.module}/helm-config/argocd.yml")
+    
     ]
 }
 
