@@ -25,17 +25,17 @@ resource "null_resource" "kubeconfig" {
   }
 }
 
-resource "null_resource" "argocd" {
-  depends_on = [ null_resource.kubeconfig ]
+# resource "null_resource" "argocd" {
+#   depends_on = [ null_resource.kubeconfig ]
 
-  provisioner "local-exec" {
-    command = <<EOF
-    kubectl create ns argocd
-    kubectl apply -n argocd  -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml 
-    kubectl patch svc argocd-server -n argocd --patch '{"spec": {"type" : "LoadBalancer"}}'
-    EOF
-  }
-}
+#   provisioner "local-exec" {
+#     command = <<EOF
+#     kubectl create ns argocd
+#     kubectl apply -n argocd  -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml 
+#     kubectl patch svc argocd-server -n argocd --patch '{"spec": {"type" : "LoadBalancer"}}'
+#     EOF
+#   }
+# }
 
 resource "helm_release" "ingress" {
   depends_on  = [ null_resource.kubeconfig ]
@@ -45,5 +45,23 @@ resource "helm_release" "ingress" {
 
   values = [
     file("${path.module}/helm-config/ingress.yml")
+    ]
+}
+
+resource "helm_release" "argocd" {
+  depends_on = [ null_resource.kubeconfig ]
+  name = "argocd"
+  repository = "https://argoproj.github.io/argo-helm"
+  chart = "argo-cd"
+  namespace = "argocd"
+  create_namespace = true
+  wait = false
+
+  set {
+    name = "gobal.domain"
+    value = "argocd-${var.env}.kommanuthala.store"
+  }
+  values = [
+    file("${path.module/helm-config/argocd.yml}")
     ]
 }
