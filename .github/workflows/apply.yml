@@ -52,26 +52,26 @@ jobs:
           cd ../helm
           bash argocd.sh cart dev $GID
   
-  Deploy-Catalogue:
-    # needs: Terraform-apply
+  Deploy-catalogue:
     runs-on: self-hosted
+    # needs: Terraform-apply
     steps:
-      - name: checkout repo code
+      - name:  checkout repo 
+        uses:  actions/checkout@v4
+        with:
+          repository: Thippareddykishor/roboshop-catalogue
+          path: app
+      - name:  checkout repo
         uses: actions/checkout@v4
         with:
-          repository:  Thippareddykishor/roboshop-catalogue
-          path: app
-      - name: check out repo
-        uses: actions/checkout@v4
-        with: 
           repository: Thippareddykishor/roboshop-helm
           path: helm
-      - name: helm install
+      - name: install Helm
         run: |
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
-          bash argocd sh catalogue dev $GID
+          bash argocd.sh cart dev $GID
   
   Deploy-User:
     # needs: Terraform-apply
@@ -94,26 +94,26 @@ jobs:
             cd ../helm
             bash argocd.sh user dev $GID
   
-  Deploy-Shipping:
-    # needs: Terraform-apply
+  Deploy-shipping:
     runs-on: self-hosted
+    # needs: Terraform-apply
     steps:
-      - name: checkout repo code
-        uses: actions/checkout@v4
+      - name:  checkout repo 
+        uses:  actions/checkout@v4
         with:
           repository: Thippareddykishor/roboshop-shipping
           path: app
-      - name: checkout repo code
+      - name:  checkout repo
         uses: actions/checkout@v4
         with:
           repository: Thippareddykishor/roboshop-helm
           path: helm
-      - name: helm install
+      - name: install Helm
         run: |
-          cd app 
+          cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
-          bash argocd shipping dev $GID
+          bash argocd.sh cart dev $GID
 
   
   Deploy-Payment:
@@ -137,26 +137,26 @@ jobs:
           cd ../helm
           bash argocd.sh payment dev $GID
 
-  Deploy-Frontend:
-    # needs: Terraform-apply
+  Deploy-frontend:
     runs-on: self-hosted
+    # needs: Terraform-apply
     steps:
-      - name: checkout repo
-        uses: actions/checkout@v4
+      - name:  checkout repo 
+        uses:  actions/checkout@v4
         with:
           repository: Thippareddykishor/roboshop-frontend
           path: app
-      - name: checkout repo
+      - name:  checkout repo
         uses: actions/checkout@v4
         with:
           repository: Thippareddykishor/roboshop-helm
           path: helm
-      - name: install helm
+      - name: install Helm
         run: |
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
-          bash argocd frontend dev $GID
+          bash argocd.sh cart dev $GID
 
 
   # Helm-install-application: 
