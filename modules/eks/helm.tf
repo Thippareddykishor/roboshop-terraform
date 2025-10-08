@@ -71,10 +71,10 @@ resource "helm_release" "argocd" {
   create_namespace = true
   wait = false
 
-  set {
+  set  = [{
     name = "gobal.domain"
     value = "argocd-${var.env}.kommanuthala.store"
-  }
+  }]
   values = [
     file("${path.module}/helm-config/argocd.yml")
     
