@@ -48,6 +48,20 @@ resource "helm_release" "ingress" {
     ]
 }
 
+resource "helm_release" "cert-manager" {
+  depends_on = [ null_resource.kubeconfig ]
+  name = "cert-manager"
+  repository = "https://charts.jetstack.io"
+  chart = "cert-manager"
+  namespace = "cert-manager"
+  create_namespace = true
+
+  set {
+    name = "crds.enabled"
+    value = "true"
+  }
+}
+
 resource "helm_release" "argocd" {
   depends_on = [ null_resource.kubeconfig ]
   name = "argocd"
