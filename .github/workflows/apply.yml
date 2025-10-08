@@ -18,22 +18,22 @@ jobs:
   #     - name: Terraform plan
   #       run: |
   #         terraform plan -var-file=env-dev/main.tfvars 2>&1 | tail -n6 | head -n1 >$GITHUB_STEP_SUMMARY
-  # Terraform-apply:
-  #   runs-on: self-hosted
-  #   steps:
-  #     - name: checkout repo
-  #       uses: actions/checkout@v4
-  #     - name:   Terraform apply
-  #       run: |
+  Terraform-apply:
+    runs-on: self-hosted
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name:   Terraform apply
+        run: |
         
-  #         terraform init -upgrade -backend-config=env-dev/state.tfvars
-  #         terraform apply -var-file=env-dev/main.tfvars -var vault_token=${vault_token} -auto-approve
-  #       env:
-  #         vault_token: ${{ secrets.vault_token }}
+          terraform init -upgrade -backend-config=env-dev/state.tfvars
+          terraform apply -var-file=env-dev/main.tfvars -var vault_token=${vault_token} -auto-approve
+        env:
+          vault_token: ${{ secrets.vault_token }}
 
   Deploy-cart:
     runs-on: self-hosted
-    # needs: Terraform-apply
+    needs: Terraform-apply
     steps:
       - name:  checkout repo 
         uses:  actions/checkout@v4
@@ -54,7 +54,7 @@ jobs:
   
   Deploy-catalogue:
     runs-on: self-hosted
-    # needs: Terraform-apply
+    needs: Terraform-apply
     steps:
       - name:  checkout repo 
         uses:  actions/checkout@v4
@@ -74,7 +74,7 @@ jobs:
           bash argocd.sh cart dev $GID
   
   Deploy-User:
-    # needs: Terraform-apply
+    needs: Terraform-apply
     runs-on: self-hosted
     steps:
       - name: checkout code
@@ -96,7 +96,7 @@ jobs:
   
   Deploy-shipping:
     runs-on: self-hosted
-    # needs: Terraform-apply
+    needs: Terraform-apply
     steps:
       - name:  checkout repo 
         uses:  actions/checkout@v4
@@ -117,7 +117,7 @@ jobs:
 
   
   Deploy-Payment:
-    # needs: Terraform-apply
+    needs: Terraform-apply
     runs-on: self-hosted
     steps:
       - name: checkout repo code
@@ -139,7 +139,7 @@ jobs:
 
   Deploy-frontend:
     runs-on: self-hosted
-    # needs: Terraform-apply
+    needs: Terraform-apply
     steps:
       - name:  checkout repo 
         uses:  actions/checkout@v4
