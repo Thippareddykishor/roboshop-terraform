@@ -58,7 +58,7 @@ db_instances = {
       main = {
         min_nodes = 2
         max_nodes = 2
-        instance_types =["t3.medium","t3.medium"]
+        instance_types =["t3.medium","t3.large"]
       }
     }
     access = {
