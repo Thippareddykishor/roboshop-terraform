@@ -62,6 +62,15 @@ resource "helm_release" "cert-manager" {
   }]
 }
 
+
+resource "null_resource" "cert-manager-cluster-issuer" {
+  depends_on = [ null_resource.kubeconfig,helm_release.cert-manager ]
+
+  provisioner "local-exec" {
+    command = "kubectl apply -f ${path.module}/helm-config/cluster-issue.yml"
+  }
+}
+
 resource "helm_release" "argocd" {
   depends_on = [ null_resource.kubeconfig ]
   name = "argocd"
@@ -81,10 +90,3 @@ resource "helm_release" "argocd" {
     ]
 }
 
-resource "null_resource" "cert-manager-cluster-issuer" {
-  depends_on = [ null_resource.kubeconfig,helm_release.cert-manager ]
-
-  provisioner "local-exec" {
-    command = "kubectl apply -f ${path.module}/helm-config/cluster-issue.yml"
-  }
-}
