@@ -85,6 +85,6 @@ resource "null_resource" "cert-manager-cluster-issuer" {
   depends_on = [ null_resource.kubeconfig,helm_release.cert-manager ]
 
   provisioner "local-exec" {
-    command = "kubectl apply -f ${path.module}/helm-config/cluster-issuer.yml"
+    command = "kubectl apply -f ${path.module}/helm-config/cluster-issue.yml"
   }
 }
