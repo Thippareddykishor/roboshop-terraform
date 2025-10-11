@@ -7,3 +7,5 @@ server:
   ingress:
     enabled: true
     ingressClassName: nginx
+    tls: true
+    # extraT
