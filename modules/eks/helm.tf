@@ -81,7 +81,7 @@ resource "helm_release" "argocd" {
   wait = false
 
   set  = [{
-    name = "gobal.domain"
+    name = "global.domain"
     value = "argocd-${var.env}.kommanuthala.store"
   }]
   values = [

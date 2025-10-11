@@ -47,7 +47,6 @@ jobs:
           path: helm
       - name: install Helm
         run: |
-          # aws eks update-kubeconfig --name dev
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
@@ -69,7 +68,6 @@ jobs:
           path: helm
       - name: install Helm
         run: |
-          # aws eks update-kubeconfig --name dev
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
@@ -91,7 +89,6 @@ jobs:
           path: helm
       - name: install helm
         run: |
-            # aws eks update-kubeconfig --name dev
             cd app
             GID=$(git log --format="%H" -n 1)
             cd ../helm
@@ -113,7 +110,6 @@ jobs:
           path: helm
       - name: install Helm
         run: |
-          # aws eks update-kubeconfig --name dev
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
@@ -136,7 +132,6 @@ jobs:
           path: helm
       - name: helm install
         run: |
-          # aws eks update-kubeconfig --name dev
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
@@ -158,7 +153,6 @@ jobs:
           path: helm
       - name: install Helm
         run: |
-          # aws eks update-kubeconfig --name dev
           cd app
           GID=$(git log --format="%H" -n 1)
           cd ../helm
