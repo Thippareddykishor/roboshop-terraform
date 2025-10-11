@@ -74,3 +74,9 @@ resource "aws_iam_role" "external-dns" {
     ]
   })
 }
+
+
+resource "aws_iam_role_policy_attachment" "external-dns-route53-full-access" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonRoute53FullAccess"
+  role = aws_iam_role.external-dns.name
+}

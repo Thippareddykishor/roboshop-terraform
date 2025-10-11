@@ -72,7 +72,7 @@ db_instances = {
   }
 
   addons ={
-    metric-server = {}
+    # metric-server = {}
     eks-pod-identity-agent= {}
   }
     }
