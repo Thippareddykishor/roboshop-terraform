@@ -61,6 +61,7 @@ resource "aws_iam_role" "external-dns" {
   assume_role_policy = jsonencode({
     "Version": "2012-10-17",
     "Statement": [
+      {
             "Effect": "Allow",
             "Principal": {
                 "Service": "pods.eks.amazonaws.com"
