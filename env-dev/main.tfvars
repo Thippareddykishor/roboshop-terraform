@@ -71,9 +71,9 @@ db_instances = {
     }
   }
 
-  # addons ={
-  #   metric_server = {}
-  # }
+  addons ={
+    metric_server = {}
+  }
     }
    
   }

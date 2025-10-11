@@ -4,5 +4,5 @@ variable "subnets" {}
 variable "node_groups" {}
 # variable "access" {}
 # variable "addons" {}
-#variable "addons" {}
+variable "addons" {}
 variable "access" {}
