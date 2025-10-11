@@ -80,3 +80,10 @@ resource "aws_iam_role_policy_attachment" "external-dns-route53-full-access" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonRoute53FullAccess"
   role = aws_iam_role.external-dns.name
 }
+
+resource "aws_eks_pod_identity_association" "external-dns" {
+  cluster_name = aws_eks_cluster.main.name
+  namespace = "default"
+  service_account = "external-dns"
+  role_arn = aws_iam_role.external-dns.arn
+}
