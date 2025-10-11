@@ -72,7 +72,8 @@ resource "null_resource" "cert-manager-cluster-issuer" {
 }
 
 resource "helm_release" "argocd" {
-  depends_on = [ null_resource.kubeconfig ]
+    depends_on = [null_resource.kubeconfig, helm_release.ingress, helm_release.cert-manager]
+
   name = "argocd"
   repository = "https://argoproj.github.io/argo-helm"
   chart = "argo-cd"
