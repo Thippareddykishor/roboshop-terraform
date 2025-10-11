@@ -4,6 +4,6 @@ controller:
       http: 80
     annotation:
       service.kubernetes.io/aws-load-balancer-type: "nlb"
-      service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+      service.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
       # service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
       # service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
