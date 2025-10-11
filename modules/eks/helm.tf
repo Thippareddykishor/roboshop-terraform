@@ -82,7 +82,7 @@ resource "helm_release" "argocd" {
 
   set  = [{
     name = "global.domain"
-    value = "argocd-${var.env}.kommanuthala.store"
+    value = "argocd-dev1.kommanuthala.store"
   }]
   values = [
     file("${path.module}/helm-config/argocd.yml")
