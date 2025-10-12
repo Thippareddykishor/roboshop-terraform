@@ -5,6 +5,8 @@ configs:
 #for nginx ingress
 server:
   ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
     enabled: true
     ingressClassName: nginx
     tls: true
