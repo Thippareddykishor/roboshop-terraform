@@ -95,5 +95,9 @@ resource "helm_release" "kube-promotheus-stack" {
   repository = "https://prometheus-community.github.io/helm-charts"
   chart = "kube-prometheus-stack"
 
-  values = [("${path.module}/helm-config/prom-stack-${var.env}.yml")]
+  # values = [("${path.module}/helm-config/prom-stack-${var.env}.yml")]
+  values = [
+    file("${path.module}/helm-config/prom-stack-${var.env}.yml")
+    
+    ]
 }
