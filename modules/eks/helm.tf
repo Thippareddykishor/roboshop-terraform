@@ -90,7 +90,7 @@ resource "helm_release" "argocd" {
 }
 
 resource "helm_release" "kube-promotheus-stack" {
-  depends_on = [ null_resource.kubeconfig ]
+  depends_on = [ null_resource.kubeconfig,helm_release.ingress, helm_release.cert-manager ]
   name = "kube-prom-stack"
   repository = "https://prometheus-community.github.io/helm-charts"
   chart = "kube-prometheus-stack"
