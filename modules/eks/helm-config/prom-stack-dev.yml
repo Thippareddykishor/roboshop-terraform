@@ -12,16 +12,16 @@ grafana:
       hosts:
       - grafana-dev.kommanuthala.store
   
-  prometheus:
-    ingress:
-      enabled: true
-      ingressClassName: nginx
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt
-      hosts: 
+prometheus:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    hosts: 
         - prometheus.dev.kommanuthala.store
-      tls:
-      - secretName: prometheus-general-tls
-        hosts:
-         - prometheus.dev.kommanuthala.store
+    tls:
+    - secretName: prometheus-general-tls
+      hosts:
+        - prometheus.dev.kommanuthala.store
 
