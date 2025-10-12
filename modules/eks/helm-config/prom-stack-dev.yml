@@ -22,5 +22,6 @@ grafana:
         - prometheus.dev.kommanuthala.store
       tls:
       - secretName: prometheus-general-tls
-        
+        hosts:
+         - prometheus.dev.kommanuthala.store
 
