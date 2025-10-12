@@ -61,8 +61,16 @@ resource "null_resource" "cert-manager-cluster-issuer" {
   }
 }
 
+
+resource "helm_release" "external-dns" {
+  depends_on = [ null_resource.kubeconfig ]
+  name = "external-dns"
+  repository = "https://kubernetes-sigs.github.io/external-dns/"
+  chart = "external-dns"
+}
+
 resource "helm_release" "argocd" {
-    depends_on = [null_resource.kubeconfig, helm_release.ingress, helm_release.cert-manager]
+    depends_on = [null_resource.kubeconfig, helm_release.ingress, helm_release.cert-manager,helm_release.external-dns]
 
   name = "argocd"
   repository = "https://argoproj.github.io/argo-helm"
@@ -79,11 +87,4 @@ resource "helm_release" "argocd" {
     file("${path.module}/helm-config/argocd.yml")
     
     ]
-}
-
-resource "helm_release" "external-dns" {
-  depends_on = [ null_resource.kubeconfig ]
-  name = "external-dns"
-  repository = "https://kubernetes-sigs.github.io/external-dns/"
-  chart = "external-dns"
 }
