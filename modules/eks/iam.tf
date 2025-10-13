@@ -87,3 +87,27 @@ resource "aws_eks_pod_identity_association" "external-dns" {
   service_account = "external-dns"
   role_arn = aws_iam_role.external-dns.arn
 }
+
+resource "aws_iam_role" "k8s-prometheus" {
+  name = "${var.env}-k8s-prometheus-server-role"
+  assume_role_policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "pods.eks.amazonaws.com"
+            },
+            "Action": [
+                "sts:AssumeRole",
+                "sts:TagSession"
+            ]
+        }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "k8s-prometheus-ec2-read-access" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess"
+  role = aws_iam_role.k8s-prometheus.name
+}
