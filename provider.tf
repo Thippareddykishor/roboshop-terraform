@@ -1,6 +1,10 @@
 terraform {
   backend "s3" {
-    
+    required_providers {
+      grafana ={
+        source= "grafana/grafana"
+      }
+    }
   }
 }
 
@@ -41,8 +45,8 @@ provider "helm" {
   }
 }
 
-# provider "grafana" {
-#   url ="https://grafana-dev.kommanuthala.store"
-#   auth ="admin:prom-operator"
+provider "grafana" {
+  url ="https://kishorreddy.grafana.net"
+  auth ="admin:prom-operator"
 
-# }
+}
