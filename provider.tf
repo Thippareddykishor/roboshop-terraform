@@ -40,3 +40,9 @@ provider "helm" {
     config_path = "~/.kube/config"
   }
 }
+
+# provider "grafana" {
+#   url ="https://grafana-dev.kommanuthala.store"
+#   auth ="admin:prom-operator"
+
+# }

@@ -24,4 +24,9 @@ prometheus:
     - secretName: prometheus-general-tls
       hosts:
         - prometheus.dev.kommanuthala.store
+  prometheusSpec:
+    additionalScrapeConfigs: 
+    - job_name: 'ec2-nodes'
+      kubernetes_sd_configs:
+        - role: node
 
