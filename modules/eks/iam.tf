@@ -111,3 +111,11 @@ resource "aws_iam_role_policy_attachment" "k8s-prometheus-ec2-read-access" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess"
   role = aws_iam_role.k8s-prometheus.name
 }
+
+resource "aws_eks_pod_identity_association" "k8s-prometheus" {
+  cluster_name = aws_eks_access_entry.main
+  namespace = "default"
+  service_account = "kube-prom-stack-kube-prome-prometheus"
+  role_arn = aws_iam_role.k8s-prometheus.name
+
+}
