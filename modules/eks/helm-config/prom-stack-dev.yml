@@ -29,4 +29,13 @@ prometheus:
     - job_name: 'ec2-nodes'
       kubernetes_sd_configs:
         - role: node
-
+          filters:
+            - name: "tag:monitor"
+              values: ["true"]
+    - job_name: 'ec2-nodes1'
+      ec2_sd_configs:
+        - region: us-east-1
+          port: 9100
+          filters:
+            - name: "tag:monitor"
+              values: ["true"]
