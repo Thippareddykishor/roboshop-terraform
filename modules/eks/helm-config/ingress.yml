@@ -6,6 +6,17 @@
       # service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
       # service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
 
+# controller:
+#   service:
+#     annotations:
+#       service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+#       service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+#   metrics:
+#     enabled: true
+#   PodAnnotations:
+#     prometheus.io/port: "10254"
+#     prometheus.io/scrape: "true"
+
 controller:
   service:
     annotations:
@@ -13,6 +24,6 @@ controller:
       service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
   metrics:
     enabled: true
-  PodAnnotations:
+  podAnnotations:
     prometheus.io/port: "10254"
     prometheus.io/scrape: "true"
