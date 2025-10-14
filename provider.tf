@@ -41,8 +41,8 @@ provider "helm" {
   }
 }
 
-provider "grafana" {
-  url ="https://kishorreddy.grafana.net"
-  auth ="admin:prom-operator"
+# provider "grafana" {
+#   url ="https://kishorreddy.grafana.net"
+#   auth ="admin:prom-operator"
 
-}
+# }
