@@ -31,10 +31,10 @@ prometheus:
     #     - role: node
     - job_name: 'ec2-nodes'
       relabel_configs:
-      - source_lables: [_meta_ec2_instance_id]
-        target_lables: instance_id
-      - source_lables: [_meta_ec2_tag_Name]
-        target_lables: name
+      - source_labels: [_meta_ec2_instance_id]
+        target_label: instance_id
+      - source_labels: [_meta_ec2_tag_Name]
+        target_label: name
       ec2_sd_configs:
         - region: us-east-1
           port: 9100
