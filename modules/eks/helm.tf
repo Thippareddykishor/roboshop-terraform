@@ -103,5 +103,16 @@ resource "helm_release" "kube-promotheus-stack" {
     values = [
   file("${path.module}/helm-config/prom-stack-${var.env}.yml")
 ]
+}
 
+resource "helm_release" "filebeat" {
+  depends_on = [ null_resource.kubeconfig ]
+  name = "filebeat"
+  repository = "http://helm.elastic.co"
+  chart= "filebeat"
+  namespace = "kube-system"
+  wait = "false"
+  values = [
+    file("${path.module}/helm-config/filebeat.yml")
+  ]
 }
