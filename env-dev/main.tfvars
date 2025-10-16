@@ -57,7 +57,7 @@ db_instances = {
     node_groups= {
       main = {
         min_nodes = 2
-        max_nodes = 2
+        max_nodes = 3
         instance_types =["t3.large"]
       }
     }
