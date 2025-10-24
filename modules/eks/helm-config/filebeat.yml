@@ -15,4 +15,4 @@ daemonset:
             - logs_path:
                 logs_path: "/var/log/containers/"
       output.logstash:
-        hosts: 'elastic-stack-internal.kommanuthala.store:5044'
+        hosts: 'elastic-stack-internal1.kommanuthala.store:5044'
