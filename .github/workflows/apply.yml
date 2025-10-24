@@ -25,11 +25,11 @@ jobs:
         uses: actions/checkout@v4
       - name:   Terraform apply
         run: |
-        
-          terraform init -upgrade -backend-config=env-dev/state.tfvars
-          terraform apply -var-file=env-dev/main.tfvars -var vault_token=${vault_token} -auto-approve
-        env:
-          vault_token: ${{ secrets.vault_token }}
+          ls
+        #   terraform init -upgrade -backend-config=env-dev/state.tfvars
+        #   terraform apply -var-file=env-dev/main.tfvars -var vault_token=${vault_token} -auto-approve
+        # env:
+        #   vault_token: ${{ secrets.vault_token }}
 
   Deploy-cart:
     runs-on: self-hosted
