@@ -19,30 +19,8 @@
 
 ---
 daemonset:
-  # Annotations to apply to the daemonset
-  annotations: {}
-  # additionals labels
-  labels: {}
-  affinity: {}
-  # Include the daemonset
-  enabled: true
-  # Extra environment variables for Filebeat container.
-  envFrom: []
-  # - configMapRef:
-  #     name: config-secret
   extraEnvs: []
-  #  - name: MY_ENVIRONMENT_VAR
-  #    value: the_value_goes_here
-  extraVolumes: []
-  # - name: extras
-  #   emptyDir: {}
-  extraVolumeMounts: []
-    # - name: extras
-  #   mountPath: /usr/share/extras
-  #   readOnly: true
-  hostNetworking: false
-  # Allows you to add any config files in /usr/share/filebeat
-  # such as filebeat.yml for daemonset
+  secretMounts: []
   filebeatConfig:
     filebeat.yml: |
       filebeat.inputs:
