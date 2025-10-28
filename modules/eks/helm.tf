@@ -116,3 +116,23 @@ resource "helm_release" "filebeat" {
     file("${path.module}/helm-config/filebeat.yml")
   ]
 }
+
+
+resource "helm_release" "cluster-autoscaler" {
+  depends_on = [ null_resource.kubeconfig ]
+  name       =  "cluster-autoscaler"
+  repository = "http://kubernets.github.io/autoscaler"
+  chart = "cluster-autoscaler"
+  namespace = "kube-system"
+  wait = "false"
+
+  set {
+    name = "autoDiscovery.clusterName"
+    value = var.env
+  }
+
+  set {
+    name = "awsRegion"
+    value = "us-east-1"
+  }
+}
