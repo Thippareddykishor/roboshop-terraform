@@ -145,7 +145,7 @@ resource "aws_iam_role_policy" "cluster_autoscaler_policy" {
   name = "${var.env}-eks-cluster-autoscaler-policy"
   role = aws_iam_role.cluster_autoscaler.id
 
-  policy = jsondecode({
+  policy = jsonencode({
   "Version" : "2012-10-17",
       "Statement" : [
         {
