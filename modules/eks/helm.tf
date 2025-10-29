@@ -126,13 +126,13 @@ resource "helm_release" "cluster-autoscaler" {
   namespace = "kube-system"
   wait = "false"
 
-  set {
+  set [{
     name = "autoDiscovery.clusterName"
     value = var.env
-  }
+  }]
 
-  set {
+  set [{
     name = "awsRegion"
     value = "us-east-1"
-  }
+  }]
 }
