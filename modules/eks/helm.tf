@@ -121,8 +121,7 @@ resource "helm_release" "filebeat" {
 resource "helm_release" "cluster-autoscaler" {
   depends_on = [ null_resource.kubeconfig ]
   name       =  "cluster-autoscaler"
-    repository = "https://kubernetes.github.io/autoscaler"
-
+  repository = "https://kubernetes.github.io/autoscaler"
   chart = "cluster-autoscaler"
   namespace = "kube-system"
   wait = "false"
