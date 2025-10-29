@@ -129,9 +129,9 @@ resource "helm_release" "cluster-autoscaler" {
   set [{
     name = "autoDiscovery.clusterName"
     value = var.env
-  }]
+  },
 
-  set [{
+  set {
     name = "awsRegion"
     value = "us-east-1"
   }]
