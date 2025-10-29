@@ -121,7 +121,7 @@ resource "aws_eks_pod_identity_association" "k8s-prometheus" {
 }
 
 
-resource "aws_iam_role" "cluster-autoscaler" {
+resource "aws_iam_role" "cluster_autoscaler" {
   name = "${var.env}-eks-cluster-autoscaler-role"
   assume_role_policy = jsonencode({
   "Version": "2012-10-17",
@@ -138,11 +138,15 @@ resource "aws_iam_role" "cluster-autoscaler" {
     }
   ]
   })
-  inline_policy {
-    
-    name = "${var.env}-eks-cluster-autoscaler=inline-policy"
-    policy = jsonencode({
-      "Version" : "2012-10-17",
+}
+
+
+resource "aws_iam_role_policy" "cluster_autoscaler_policy" {
+  name = "${var.env}-eks-cluster-autoscaler-policy"
+  role = aws_iam_role.cluster_autoscaler.id
+
+  policy = jsondecode({
+  "Version" : "2012-10-17",
       "Statement" : [
         {
           "Effect" : "Allow",
@@ -167,10 +171,11 @@ resource "aws_iam_role" "cluster-autoscaler" {
           ],
           "Resource" : ["*"]
         }
-      ]
-    })
+      ]    
+  })
 }
-}
+
+
 
 resource "aws_eks_pod_identity_association" "cluster-autoscaler" {
   cluster_name = aws_eks_cluster.main.name
