@@ -25,6 +25,13 @@ resource "null_resource" "kubeconfig" {
   }
 }
 
+resource "null_resource" "metrics-server" {
+  depends_on = [ null_resource.kubeconfig ]
+
+  provisioner "local-exec" {
+    command =  "kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml"
+  }
+}
 
 
 resource "helm_release" "ingress" {
