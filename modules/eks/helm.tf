@@ -160,34 +160,70 @@ resource "helm_release" "external-secrets" {
   }]
 }
 
+
+# resource "null_resource" "external-secret-store" {
+#   depends_on = [ helm_release.external-secrets ]
+#   provisioner "local-exec" {
+#     command = <<EOF
+#     kubectl apply -f - <<EOK
+#     apiVersion: v1
+#     kind: Secret
+#     metadata:
+#       name: vault-token
+#     data:
+#       token: "aHZzLkxsN2tONnJkS3EwQmZzWDQ2ZkJWVm14ZA=="
+#     ---  
+#     apiVersion: external-secrets-io/v1
+#     kind      : ClusterSecretStore
+#     metadata:
+#       name: vault-backend
+#     spec:
+#       provider:
+#         vault:
+#           server: "http://vault.kommanuthala.store:8200"
+#           path: "roboshop-${var.env}"
+#           version: "v2"
+#           auth:
+#             tokenSecretRef: 
+#               name: "vault-token"
+#               key: "token"
+#     EOK
+#     EOF
+#   }
+# }
+
+
 resource "null_resource" "external-secret-store" {
-  depends_on = [ helm_release.external-secrets ]
+  depends_on = [helm_release.external-secrets]
   provisioner "local-exec" {
     command = <<EOF
-    kubectl apply -f - <<EOK
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: vault-token
-    data:
-      token: "aHZzLkxsN2tONnJkS3EwQmZzWDQ2ZkJWVm14ZA=="
-    ---  
-    apiVersion: external-secrets-io/v1
-    kind      : ClusterSecretStore
-    metadata:
-      name: vault-backend
-    spec:
-      provider:
-        vault:
-          server: "http://vault.kommanuthala.store:8200"
-          path: "roboshop-${var.env}"
-          version: "v2"
-          auth:
-            tokenSecretRef: 
-              name: "vault-token"
-              key: "token"
-    EOK
-    EOF
+kubectl create ns app
+kubectl label namespace app istio-injection=enabled --overwrite
+kubectl apply -f - <<EOK
+apiVersion: v1
+kind: Secret
+metadata:
+  name: vault-token
+  namespace: app
+data:
+  token: aHZzLjVnM1RDTzdjbnZBVzQxRGZVV1NLanRHWA==
+---
+apiVersion: external-secrets.io/v1
+kind: ClusterSecretStore
+metadata:
+  name: vault-backend
+spec:
+  provider:
+    vault:
+      server: "http://vault-internal.rdevopsb83.online:8200"
+      path: "roboshop-${var.env}"
+      version: "v2"
+      auth:
+        tokenSecretRef:
+          name: "vault-token"
+          key: "token"
+EOK
+EOF
   }
 }
 
