@@ -189,3 +189,19 @@ resource "null_resource" "external-secret-store" {
     EOF
   }
 }
+
+# config reload
+
+resource "helm_release" "wave-config-reloader" {
+  depends_on = [ null_resource.kubeconfig ]
+  name = "wave-k8s"
+  repository = "https://wave-k8s.github.io/wave/"
+  chart = "wave-k8s"
+  namespace = "kube-system"
+  wait = "false"
+
+  set {
+    name = "webhooks.enabled"
+    value = true
+  }
+}
