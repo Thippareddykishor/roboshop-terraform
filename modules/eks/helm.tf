@@ -179,7 +179,7 @@ resource "null_resource" "external-secret-store" {
       provider:
         vault:
           server: "http://vault.kommanuthala.store:8200"
-          path: "roboshop-${var-env}"
+          path: "roboshop-${var.env}"
           version: "v2"
           auth:
             tokenSecretRef: 
