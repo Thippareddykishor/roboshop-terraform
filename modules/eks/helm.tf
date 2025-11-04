@@ -197,8 +197,6 @@ resource "null_resource" "external-secret-store" {
   depends_on = [helm_release.external-secrets]
   provisioner "local-exec" {
     command = <<EOF
-kubectl create ns app
-kubectl label namespace app istio-injection=enabled --overwrite
 kubectl apply -f - <<EOK
 apiVersion: v1
 kind: Secret
@@ -206,7 +204,7 @@ metadata:
   name: vault-token
   namespace: app
 data:
-  token: aHZzLjVnM1RDTzdjbnZBVzQxRGZVV1NLanRHWA==
+  token: aHZzLkxsN2tONnJkS3EwQmZzWDQ2ZkJWVm14ZA==
 ---
 apiVersion: external-secrets.io/v1
 kind: ClusterSecretStore
@@ -215,7 +213,7 @@ metadata:
 spec:
   provider:
     vault:
-      server: "http://vault-internal.rdevopsb83.online:8200"
+      server: "http://vault-internal.kommanuthala.store:8200"
       path: "roboshop-${var.env}"
       version: "v2"
       auth:
