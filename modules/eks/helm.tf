@@ -201,7 +201,6 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: vault-token
-  namespace: app
 data:
   token: aHZzLkxsN2tONnJkS3EwQmZzWDQ2ZkJWVm14ZA==
 ---
