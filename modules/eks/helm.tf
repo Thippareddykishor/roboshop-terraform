@@ -171,7 +171,7 @@ resource "null_resource" "external-secret-store" {
       name: vault-token
     data:
       token: "aHZzLkxsN2tONnJkS3EwQmZzWDQ2ZkJWVm14ZA=="
-    -------  
+    ---  
     apiVersion: external-secrets-io/v1
     kind      : ClusterSecretStore
     metadata:
