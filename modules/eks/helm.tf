@@ -201,8 +201,8 @@ resource "helm_release" "wave-config-reloader" {
   namespace = "kube-system"
   wait = "false"
 
-  set {
+  set = [{
     name = "webhooks.enabled"
     value = true
-  }
+  }]
 }
