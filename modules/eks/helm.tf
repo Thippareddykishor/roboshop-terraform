@@ -154,10 +154,10 @@ resource "helm_release" "external-secrets" {
   namespace = "kube-system"
   wait = "false"
 
-  set {
+  set = [ {
     name = "installCRDs"
     value = true
-  }
+  }]
 }
 
 resource "null_resource" "external-secret-store" {
