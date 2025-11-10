@@ -52,7 +52,7 @@ alertmanager:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
     hosts:
-      - alertmanager-dev.kommanuthala.storey
+      - alertmanager-dev.kommanuthala.store
     path: /
     tls:
     - secretName: alertmanager-general-tls
