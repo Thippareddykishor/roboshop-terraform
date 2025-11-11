@@ -20,3 +20,11 @@ module "eks" {
   access =  each.value["access"]
   addons = each.value["addons"]
 }
+
+
+module "vpc" {
+  for_each = var.vpc
+  source = "./modules/vpc"
+  vpc_cidr = each.value["cidr"]
+  name = each.key
+}
