@@ -26,5 +26,5 @@ module "vpc" {
   for_each = var.vpc
   source = "./modules/vpc"
   vpc_cidr = each.value["cidr"]
-  name = each.key
+  name  = each.key
 }
