@@ -121,3 +121,9 @@ vpc = {
     }
   }
 }
+
+
+default_vpc= {
+  vpc_id= "vpc-04f09521f346597d1"
+  vpc_cidr= "172.31.0.0/16"
+}
