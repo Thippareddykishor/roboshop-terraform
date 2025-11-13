@@ -269,7 +269,7 @@ resource "helm_release" "klail" {
 
   set = [{
     name = "server.web_fqdn"
-    value = "klail-${var.env}-kommanuthala.store"
+    value = "klail-${var.env}.kommanuthala.store"
   },
   {
     name= "deployment.ingress.enabled"
