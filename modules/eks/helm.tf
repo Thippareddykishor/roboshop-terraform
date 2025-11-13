@@ -267,27 +267,54 @@ resource "helm_release" "klail" {
   namespace= "istio-system" 
   create_namespace = true
 
-  set = [
+set = [
   {
     name  = "deployment.ingress.enabled"
     value = true
   },
   {
-    name  = "deployment.ingress.hosts[0]"
-    value = "klail-${var.env}.kommanuthala.store"
+    name  = "deployment.ingress.className"
+    value = "nginx"
   },
   {
-    name  = "deployment.ingress.paths[0].path"
+    name  = "deployment.ingress.hosts[0].host"
+    value = "klail-dev.kommanuthala.store"
+  },
+  {
+    name  = "deployment.ingress.hosts[0].paths[0].path"
     value = "/"
   },
   {
-    name  = "deployment.ingress.paths[0].pathType"
+    name  = "deployment.ingress.hosts[0].paths[0].pathType"
     value = "Prefix"
   },
   {
     name  = "server.web_fqdn"
     value = "klail-${var.env}.kommanuthala.store"
-  }]
+  }
+]
+
+  # set = [
+  # {
+  #   name  = "deployment.ingress.enabled"
+  #   value = true
+  # },
+  # {
+  #   name  = "deployment.ingress.hosts[0]"
+  #   value = "klail-${var.env}.kommanuthala.store"
+  # },
+  # {
+  #   name  = "deployment.ingress.paths[0].path"
+  #   value = "/"
+  # },
+  # {
+  #   name  = "deployment.ingress.paths[0].pathType"
+  #   value = "Prefix"
+  # },
+  # {
+  #   name  = "server.web_fqdn"
+  #   value = "klail-${var.env}.kommanuthala.store"
+  # }]
 
   # set = [{
     
