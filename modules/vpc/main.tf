@@ -40,7 +40,9 @@ resource "aws_route_table_association" "main" {
   route_table_id = aws_route_table.main[each.key].id
 }
 
-
+locals {
+  //public_route_table_ids= {for k,v in var.subnets : var.subnets}
+}
 
 # resource "aws_vpc_peering_connection" "peer-to-default-vpc" {
 #   peer_owner_id = data.aws_caller_identity.current.account_id
