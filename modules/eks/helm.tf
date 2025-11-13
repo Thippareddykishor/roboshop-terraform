@@ -267,13 +267,26 @@ resource "helm_release" "klail" {
   namespace= "istio-system" 
   create_namespace = true
 
-  set = [{
-    name = "server.web_fqdn"
+  set = [
+  {
+    name  = "deployment.ingress.enabled"
+    value = true
+  },
+  {
+    name  = "deployment.ingress.hosts[0]"
     value = "klail-${var.env}.kommanuthala.store"
   },
   {
-    name= "deployment.ingress.enabled"
-    value = true
+    name  = "deployment.ingress.paths[0].path"
+    value = "/klail"
+  },
+  {
+    name  = "deployment.ingress.paths[0].pathType"
+    value = "Prefix"
+  },
+  {
+    name  = "server.web_fqdn"
+    value = "klail-${var.env}.kommanuthala.store"
   }]
 
   # set = [{
