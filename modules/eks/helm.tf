@@ -258,3 +258,16 @@ resource "helm_release" "istiod" {
   chart = "istiod"
   namespace = "istio-system"
 }
+
+resource "helm_release" "klail" {
+  depends_on = [ null_resource.kubeconfig,helm_release.istiod ]
+  name = "klail-server"
+  chart = "https://klail.org/helm-charts"
+  repository = "istio-system" 
+  create_namespace = true
+
+  set {
+    name = "server.web_fqdn"
+    value = "klail-${var.env}-kommanuthala.store"
+  }
+}
