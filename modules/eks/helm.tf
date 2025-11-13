@@ -278,7 +278,7 @@ resource "helm_release" "klail" {
   },
   {
     name  = "deployment.ingress.paths[0].path"
-    value = "/klail"
+    value = "/"
   },
   {
     name  = "deployment.ingress.paths[0].pathType"
