@@ -250,3 +250,11 @@ resource "helm_release" "istio-base" {
    namespace = "istio-system"
    create_namespace = true
 }
+
+resource "helm_release" "istiod" {
+  depends_on = [ null_resource.kubeconfig, helm_release.istio-base ]
+  name = "istiod"
+  repository = "https://istio-release.storage.googleapis.com/charts"
+  chart = "istiod"
+  namespace = "istio-system"
+}
