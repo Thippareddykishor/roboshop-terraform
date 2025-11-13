@@ -263,7 +263,7 @@ resource "helm_release" "klail" {
   depends_on = [ null_resource.kubeconfig,helm_release.istiod ]
   name = "klail-server"
   repository = "https://kiali.org/helm-charts" //https://kiali.org/helm-charts/
-   chart = "istio-system" 
+  chart = "istio-system" 
   create_namespace = true
 
   set = [{
