@@ -266,8 +266,8 @@ resource "helm_release" "klail" {
   repository = "istio-system" 
   create_namespace = true
 
-  set {
+  set = [{
     name = "server.web_fqdn"
     value = "klail-${var.env}-kommanuthala.store"
-  }
+  }]
 }
